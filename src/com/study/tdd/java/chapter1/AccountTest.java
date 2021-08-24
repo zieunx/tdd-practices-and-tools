@@ -1,28 +1,31 @@
 package com.study.tdd.java.chapter1;
 
+import org.junit.Test;
+
+import static org.junit.Assert.fail;
+
 public class AccountTest {
 
+    @Test
     public void testAccount() throws Exception {
-        Account account = new Account();
-
-        if (account == null) {
-            throw  new Exception("계좌 생성 실패");
-        }
+        Account account = new Account(10000);
     }
 
-    public void testGetBalance() {
-
-    }
-
-    public static void main(String[] args) {
-        AccountTest test = new AccountTest();
-        try {
-            test.testAccount(); // 계좌생성 테스트
-            test.testGetBalance(); // 잔고조회 테스트12
-        } catch (Exception e) {
-            System.out.println("실패 X");
-            return;
+    @Test
+    public void testGetBalance() throws Exception {
+        Account account = new Account(10000);
+        if (account.getBalance() != 10000) {
+            fail();
         }
-        System.out.println("성공 O");
+
+        account = new Account(1000);
+        if (account.getBalance() != 1000) {
+            fail();
+        }
+
+        account = new Account(0);
+        if (account.getBalance() != 0) {
+            fail();
+        }
     }
 }
